@@ -1,41 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Simply tell Laravel the HTTP verbs and URIs it should respond to. It is a
-| breeze to setup your application using Laravel's RESTful routing and it
-| is perfectly suited for building large applications and simple APIs.
-|
-| Let's respond to a simple GET request to http://example.com/hello:
-|
-|		Route::get('hello', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| You can even respond to more than one URI:
-|
-|		Route::post(array('hello', 'world'), function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| It's easy to allow URI wildcards using (:num) or (:any):
-|
-|		Route::put('hello/(:any)', function($name)
-|		{
-|			return "Welcome, $name.";
-|		});
-|
-*/
+// quiz Resource
+Route::get('/', 'quizzes@index');
+Route::get('quizzes', array('as' => 'quizzes', 'uses' => 'quizzes@index'));
+Route::get('quizzes/(:any)', array('as' => 'quiz', 'uses' => 'questions@index'));
+Route::get('quizzes/new', array('as' => 'new_quiz', 'uses' => 'quizzes@new'));
+Route::get('quizzes/(:any)edit', array('as' => 'edit_quiz', 'uses' => 'quizzes@edit'));
+Route::post('quizzes', 'quizzes@create');
+Route::put('quizzes/(:any)', 'quizzes@update');
+Route::delete('quizzes/(:any)', 'quizzes@destroy');
 
-Route::get('/', function()
-{
-	return View::make('home.index');
-});
+Route::get('quizzes/(:any)/questions.json', 'questions@json');
+
+
+Route::get('quizzes/(:any)/questions', array('as' => 'questions', 'uses' => 'questions@index'));
+Route::get('quizzes/(:any)/questions/(:num)', array('as' => 'question', 'uses' => 'questions@show'));
+Route::post('quizzes/(:any)/questions', 'questions@create');
+Route::put('quizzes/(:any)/questions/(:num)', 'questions@update');
+Route::delete('quizzes/(:any)/questions/(:num)', 'questions@destroy');
 
 /*
 |--------------------------------------------------------------------------
