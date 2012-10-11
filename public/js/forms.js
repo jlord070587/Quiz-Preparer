@@ -1,5 +1,5 @@
 (function() {
-	// duplicate on indexblade
+	// duplicate on index.blade
 	var form = $('#new-question-form');
 
 
