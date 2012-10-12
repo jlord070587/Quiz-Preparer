@@ -9,8 +9,10 @@ class Quizzes_Controller extends Base_Controller {
      */
 	public function get_index()
     {
+        $quizzes = Quiz::with('questions')->get();
+
         return View::make('quiz.index')
-            ->with('quizzes', Quiz::all());
+            ->with('quizzes', $quizzes);
     }    
 
     /**
