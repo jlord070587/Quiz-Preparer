@@ -109,5 +109,4 @@ class Questions_Controller extends Base_Controller {
         Question::find($id)->delete();
         return Redirect::back();
     }
-
 }
