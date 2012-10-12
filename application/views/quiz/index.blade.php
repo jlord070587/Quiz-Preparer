@@ -12,7 +12,8 @@
 		<tr>
 			<th>Course Title</th>
 			<th>Instructor</th>
-			<th>Num Questions</th>
+			<th>Question Count</th>
+			<th>Average Score</th>
 			<th>URL</th>
 		</tr>
 	</thead>
@@ -21,9 +22,9 @@
 			<tr>
 				<td>{{HTML::link_to_route('questions', $quiz->title, $quiz->slug);}}</td>
 				<td>{{$quiz->instructor}}</td>
-				<td>{{count($quiz->questions)}}</td>
+				<td>{{$quiz->numquestions}}</td>
+				<td>{{$quiz->averagescore}}%</td>
 				<td>{{HTML::link('http://tutsplus.s3.amazonaws.com/tutspremium/quizzes/index.html?id=' . $quiz->slug, 'Link')}}</td>
-
 			</tr>
 		@empty
 			<tr>

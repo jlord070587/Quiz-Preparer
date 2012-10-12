@@ -9,7 +9,7 @@ class Quizzes_Controller extends Base_Controller {
      */
 	public function get_index()
     {
-        $quizzes = Quiz::with('questions')->get();
+        $quizzes = Quiz::withStats();
 
         return View::make('quiz.index')
             ->with('quizzes', $quizzes);
@@ -73,7 +73,6 @@ class Quizzes_Controller extends Base_Controller {
         );
 
        return Response::make('Score Added', 200, $headers);
-        
     }    
 
 	public function delete_destroy()
