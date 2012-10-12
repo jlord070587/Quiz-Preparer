@@ -1,28 +1,6 @@
 @layout('layout')
 
 @section('container')
-<style>
-	form li {
-		margin-bottom: 1.5em;
-	}
-
-	form label {
-		display: inline;
-		font-weight: bold;
-	}
-
-	li input, li textarea {display: block !important;}
-
-	form li span {
-		color: #005580;
-		font-style: italic;
-	}
-	textarea {
-		width: 75%;
-	}
-
-	.radio { padding-left: 0;}
-</style>
 
 {{ Form::open("quizzes/$quiz->slug/questions/$question->id", 'PUT', array('id' => 'new-question-form')) }}
 	<fieldset>

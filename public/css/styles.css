@@ -1,0 +1,40 @@
+form ul {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+form li {
+	margin-bottom: 1.5em;
+	list-style: none;
+}
+
+form label {
+	display: inline;
+	font-weight: bold;
+}
+
+li input,li textarea {
+	display: block !important;
+}
+
+form li span {
+	color: #005580;
+	font-style: italic;
+}
+
+input[type=text],textarea {
+	width: 75%;
+}
+
+textarea {
+	height: 100px;
+}
+
+.radio {
+	padding-left: 0;
+}
+
+.restButton {
+	margin: 0;
+	display: inline-block;
+}
