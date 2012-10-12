@@ -56,12 +56,28 @@ class Quizzes_Controller extends Base_Controller {
 
 	public function put_update()
     {
+        $completedQuiz = (object)Input::get();
 
+        $slug = strtolower(str_replace(' ', '-', $completedQuiz->slug));
+
+        $quiz = Quiz::where_slug($slug)->first();
+
+        Score::create(array(
+            'quiz_id' => $quiz->id,
+            'score'   => $completedQuiz->score
+        ));
+
+        $headers = array(
+            'Access-Control-Allow-Origin' => '*',
+            'Content-Type' => 'application/json'
+        );
+
+       return Response::make('updated quiz with score!', 200, $headers);
+        
     }    
 
 	public function delete_destroy()
     {
 
     }
-
 }

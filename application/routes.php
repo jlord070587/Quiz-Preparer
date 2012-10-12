@@ -12,7 +12,6 @@ Route::delete('quizzes/(:any)', 'quizzes@destroy');
 
 Route::get('quizzes/(:any)/questions.json', 'questions@json');
 
-
 Route::get('quizzes/(:any)/questions', array('as' => 'questions', 'uses' => 'questions@index'));
 Route::get('quizzes/(:any)/questions/(:num)', array('as' => 'question', 'uses' => 'questions@show'));
 Route::post('quizzes/(:any)/questions', 'questions@create');
