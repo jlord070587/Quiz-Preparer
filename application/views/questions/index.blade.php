@@ -11,7 +11,7 @@
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
-			<th>Course Title</th>
+			<th>Question Title</th>
 			<th>Delete?</th>
 		</tr>
 	</thead>
