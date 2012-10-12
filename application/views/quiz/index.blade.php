@@ -13,6 +13,7 @@
 			<th>Course Title</th>
 			<th>Instructor</th>
 			<th>Num Questions</th>
+			<th>URL</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,10 +22,13 @@
 				<td>{{HTML::link_to_route('questions', $quiz->title, $quiz->slug);}}</td>
 				<td>{{$quiz->instructor}}</td>
 				<td>{{count($quiz->questions)}}</td>
+				<td>{{HTML::link('http://tutsplus.s3.amazonaws.com/tutspremium/quizzes/index.html?id=' . $quiz->slug, 'Link')}}</td>
+
 			</tr>
 		@empty
 			<tr>
 				<td>There are currently no quizzes in the database.</td>
+				<td>N/A</td>
 				<td>N/A</td>
 				<td>N/A</td>
 			</tr>
