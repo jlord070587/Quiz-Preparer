@@ -7,7 +7,10 @@ Route::get('quizzes/(:any)', array('as' => 'quiz', 'uses' => 'questions@index'))
 Route::get('quizzes/new', array('as' => 'new_quiz', 'uses' => 'quizzes@new'));
 Route::get('quizzes/(:any)edit', array('as' => 'edit_quiz', 'uses' => 'quizzes@edit'));
 Route::post('quizzes', 'quizzes@create');
+
 Route::put('quizzes/(:any)', 'quizzes@update');
+Route::get('quizzes/(:any)/addScore', 'quizzes@update');
+
 Route::delete('quizzes/(:any)', 'quizzes@destroy');
 
 Route::get('quizzes/(:any)/questions.json', 'questions@json');
