@@ -68,14 +68,11 @@ class Quizzes_Controller extends Base_Controller {
             'score'   => $completedQuiz->score
         ));
 
-        $response = new Response(json_encode('hi there'));
-
         $headers = array(
-            'Access-Control-Allow-Origin' => '*',
-            'Content-Type' => 'application/json'
+            'Access-Control-Allow-Origin' => '*'
         );
 
-       return Response::make(json_encode($json), 200, $headers);
+       return Response::make('Score Added', 200, $headers);
         
     }    
 
