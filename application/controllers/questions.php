@@ -3,6 +3,7 @@
 class Questions_Controller extends Base_Controller {    
 
     public $restful = true;
+
     /**
      * Display all questions and add new ones for a quiz
      */
@@ -54,27 +55,26 @@ class Questions_Controller extends Base_Controller {
     public function get_json($quizSlug)
     {
         $quiz = Quiz::where_slug($quizSlug)->first();
+        $questions= $quiz->questions()->order_by(DB::raw('RAND()'))->get();    
 
-        $questions = Question::where_quiz_id($quiz->id)->get();
-
-       $json = array(
+        $json = array(
             'meta' => array(
                 'title' => $quiz->title,
                 'courseUrl' => $quiz->courseurl,
                 'quizUrl' => $quiz->quizurl
             )
-       );
+        );
 
-       $questions = Helpers::dashSeparatedToArray($questions, array('choices', 'accept'));
+        $questions = Helpers::dashSeparatedToArray($questions, array('choices', 'accept'));
         
-       $json['questions'] = eloquent_to_json($questions);
+        $json['questions'] = eloquent_to_json($questions);
 
-       $response = new Response(json_encode($json));
+        $response = new Response(json_encode($json));
 
-       $headers = array(
+        $headers = array(
             'Access-Control-Allow-Origin' => '*',
             'Content-Type' => 'application/json'
-       );
+        );
 
        return Response::make(json_encode($json), 200, $headers);
     }
@@ -109,4 +109,5 @@ class Questions_Controller extends Base_Controller {
         Question::find($id)->delete();
         return Redirect::back();
     }
+    
 }
