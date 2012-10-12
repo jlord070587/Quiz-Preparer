@@ -26,6 +26,7 @@
 			<tr>
 				<td>There are currently no quizzes in the database.</td>
 				<td>N/A</td>
+				<td>N/A</td>
 			</tr>
 		@endforelse
 	</tbody>

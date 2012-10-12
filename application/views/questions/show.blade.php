@@ -66,7 +66,7 @@
 
 			<li class="text">
 				{{ Form::label('accept', 'Accept:') }}
-				<span>Dash-separated list of answers that are acceptable. Put each item on its own line.</span>
+				<span>Optional: ash-separated list of answers that are acceptable. Put each item on its own line.</span>
 				{{ Form::textarea('accept', $question->accept) }}
 			</li>
 

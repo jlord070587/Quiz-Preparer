@@ -37,28 +37,39 @@
 </h1>
 
 <!-- display existing questions -->
-@forelse($questions as $question)
-	<ul>
-		<li>
-			{{ HTML::link_to_route('question', $question->title, array($quiz->slug, $question->id)) }}
-			{{ Form::open("quizzes/$quiz->slug/questions/$question->id", "DELETE", array('class' => 'restButton'))}}
-					{{ Form::submit('x', array('class' => 'btn btn-danger btn-mini')) }}
-			{{ Form::close()}}
-		</li>
-	</ul>
-@empty
-	<div class="alert">
-  		There aren't any questions assigned to this quiz currently.
-	</div>
-	
-@endforelse
+<hr>
+<h2>Current Questions</h2>
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Course Title</th>
+			<th>Delete?</th>
+		</tr>
+	</thead>
+	<tbody>
+		@forelse($questions as $question)
+			<tr>
+			<td>{{ HTML::link_to_route('question', $question->title, array($quiz->slug, $question->id)) }}</td>
+			<td>
+				{{ Form::open("quizzes/$quiz->slug/questions/$question->id", "DELETE", array('class' => 'restButton'))}}
+					{{ Form::submit('x') }}
+				{{ Form::close()}}
+			</td>
+			</tr>
+		@empty
+			<tr>
+				<td>There aren't any questions assigned to this quiz currently. </td>
+				<td>N/A</td>
+			</tr>
+		@endforelse
+	</tbody>
+</table>
 
-
+<hr>
 <h2>Add Question to This Quiz</h2>
 
 {{ Form::open("quizzes/$quiz->slug/questions", 'POST', array('id' => 'new-question-form')) }}
 	<fieldset>
-		<legend>New Question</legend>
 		<ul>
 			<li class="all">
 				{{ Form::label('title', 'Title: ') }}
@@ -98,7 +109,7 @@
 
 			<li class="text">
 				{{ Form::label('accept', 'Accept:') }}
-				<span>Dash-separated list of answers that are acceptable. Put each item on its own line.</span>
+				<span>Optional: Dash-separated list of answers that are acceptable. Put each item on its own line.</span>
 				{{ Form::textarea('accept') }}
 			</li>
 
