@@ -77,7 +77,7 @@
 			</li>
 
 			<li class="all">
-				{{ Form::submit('Update Question', array('class' => 'btn btn-success, '', array('class' => 'input-xxlarge')) }}')) }}
+				{{ Form::submit('Update Question', array('class' => 'btn btn-success input-xxlarge')) }}
 			</li>
 		</ul>
 		{{ Form::hidden('quizId', $quiz->id) }}
