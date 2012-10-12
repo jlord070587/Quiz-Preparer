@@ -8,8 +8,6 @@
 </h1>
 
 <!-- display existing questions -->
-<hr>
-<h2>Current Questions</h2>
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>
@@ -37,7 +35,7 @@
 </table>
 
 <hr>
-<h2>Add Question to This Quiz</h2>
+<h2>Add Question</h2>
 
 {{ Form::open("quizzes/$quiz->slug/questions", 'POST', array('id' => 'new-question-form')) }}
 	<fieldset>
