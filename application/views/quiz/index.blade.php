@@ -4,8 +4,7 @@
 
 <h1>
 	All Quizzes 
-	<small>{{HTML::link_to_route('new_quiz', 'Or Create A New One')}}
-	</small>
+	<small>{{HTML::link_to_route('new_quiz', 'Create New')}}</small>
 </h1>
 
 @forelse($quizzes as $quiz)

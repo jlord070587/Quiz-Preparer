@@ -5,11 +5,23 @@
 	form li {
 		margin-bottom: 1.5em;
 	}
-	li input, li textarea {display: block;}
+
+	form label {
+		display: inline;
+		font-weight: bold;
+	}
+
+	li input, li textarea {display: block !important;}
+
 	form li span {
-		color: red;
+		color: #005580;
 		font-style: italic;
 	}
+	textarea {
+		width: 75%;
+	}
+
+	.radio { padding-left: 0;}
 </style>
 
 {{ Form::open("quizzes/$quiz->slug/questions/$question->id", 'PUT', array('id' => 'new-question-form')) }}
@@ -37,7 +49,7 @@
 			<li class="text radio answer">
 				{{ Form::label('answer', 'Answer: ') }}
 				<span>What is the answer to this question?</span>
-				{{ Form::text('answer', $question->answer) }}
+				{{ Form::text('answer', $question->answer, array('class' => 'input-xxlarge')) }}
 			</li>
 
 			<li class="boolean answer">
@@ -65,7 +77,7 @@
 			</li>
 
 			<li class="all">
-				{{ Form::submit('Update Question') }}
+				{{ Form::submit('Update Question', array('class' => 'btn btn-success, '', array('class' => 'input-xxlarge')) }}')) }}
 			</li>
 		</ul>
 		{{ Form::hidden('quizId', $quiz->id) }}

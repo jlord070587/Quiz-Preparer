@@ -2,34 +2,59 @@
 
 @section('container')
 
-<h1>{{$quiz->title}} <span>{{HTML::link_to_route('quizzes', 'All Quizzes')}}</span></h1>
+<style>
+	form li {
+		margin-bottom: 1.5em;
+		}
+
+	form label {
+		display: inline;
+		font-weight: bold;
+	}
+	li input, li textarea {display: block !important;}
+
+	form li span {
+		color: #005580;
+		font-style: italic;
+	}
+
+	textarea {
+		width: 75%;
+	}
+
+	.radio { padding-left: 0;}
+
+	.restButton {
+		margin: 0;
+		display: inline-block;
+	}
+</style>
+
+
+<h1>
+	{{$quiz->title}}
+	<small>{{HTML::link_to_route('quizzes', 'All Quizzes')}}</small>
+</h1>
+
 <!-- display existing questions -->
 @forelse($questions as $question)
 	<ul>
 		<li>
 			{{ HTML::link_to_route('question', $question->title, array($quiz->slug, $question->id)) }}
-			{{ Form::open("quizzes/$quiz->slug/questions/$question->id", "DELETE")}}
-				{{ Form::submit('Delete') }}
+			{{ Form::open("quizzes/$quiz->slug/questions/$question->id", "DELETE", array('class' => 'restButton'))}}
+					{{ Form::submit('x', array('class' => 'btn btn-danger btn-mini')) }}
 			{{ Form::close()}}
 		</li>
 	</ul>
 @empty
-	There aren't any questions assigned to this quiz currently.
+	<div class="alert">
+  		There aren't any questions assigned to this quiz currently.
+	</div>
+	
 @endforelse
 
 
 <h2>Add Question to This Quiz</h2>
-
-<style>
-	form li {
-		margin-bottom: 1.5em;
-	}
-	li input, li textarea {display: block;}
-	form li span {
-		color: red;
-		font-style: italic;
-	}
-</style>
 
 {{ Form::open("quizzes/$quiz->slug/questions", 'POST', array('id' => 'new-question-form')) }}
 	<fieldset>
@@ -56,7 +81,7 @@
 			<li class="text radio">
 				{{ Form::label('answer', 'Answer: ') }}
 				<span>What is the answer to this question?</span>
-				{{ Form::text('answer') }}
+				{{ Form::text('answer', '', array('class' => 'input-xxlarge')) }}
 			</li>
 
 			<li class="boolean">
@@ -88,12 +113,9 @@
 			</li>
 
 			<li class="all">
-				{{ Form::submit('Add Question') }}
+				{{ Form::submit('Add Question', array('class' => 'btn btn-success')) }}
 			</li>
 		</ul>
-		
-		
-		
 	</fieldset>
 {{ Form::close() }}
 

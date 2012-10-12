@@ -2,7 +2,15 @@
 <html>
 <head>
 	<title>Quiz Preparer</title>
+	{{HTML::style('css/bootstrap.min.css')}}
 	<style>
+	form ul {
+		margin-left: 0;
+		padding-left: 0;
+	}
+	form li {
+		list-style: none;
+	}
 	.container {
 		width: 80%;
 		margin: auto;
