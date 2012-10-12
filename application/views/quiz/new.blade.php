@@ -3,14 +3,14 @@
 @section('container')
 
 <h1>Create New Quiz</h1>
-
+	
 {{ Form::open('quizzes') }}
 	<fieldset>
 		<legend>Meta Information</legend>
 		<ul>
 			<li>
 				{{ Form::label('title', 'Title: ') }}
-				{{ Form::text('title', '', array('class' => 'input-xxlarge')) }}
+				{{ Form::text('title', '', array('class' => 'input-xxlarge title')) }}
 			</li>
 
 			<li>
@@ -34,4 +34,21 @@
 
 {{ Form::close() }}
 
+@endsection
+
+@section('scripts')
+	<script>
+	// Dynamically set course and quiz urls
+	(function() {
+		var courseUrl = $('#courseUrl');
+		var quizUrl = $('#quizUrl');
+
+		$('form').on('keyup', '#title', function() {
+			var courseSlug = $(this).val().toLowerCase().replace(/ /g, '-');
+
+			courseUrl.val('http://tutsplus.com/course/' + courseSlug);
+			quizUrl.val('http://tutsplus.com/lesson/' + courseSlug + '-course-quiz');
+		});
+	})();
+	</script>
 @endsection
