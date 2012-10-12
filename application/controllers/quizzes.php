@@ -52,8 +52,9 @@ class Quizzes_Controller extends Base_Controller {
 	public function get_new()
     {
         return View::make('quiz.new');
-    }    
+    } 
 
+    public function get_update() { $this->put_update(); }
 	public function put_update()
     {
         $completedQuiz = (object)Input::get();
@@ -67,12 +68,14 @@ class Quizzes_Controller extends Base_Controller {
             'score'   => $completedQuiz->score
         ));
 
+        $response = new Response(json_encode('hi there'));
+
         $headers = array(
             'Access-Control-Allow-Origin' => '*',
             'Content-Type' => 'application/json'
         );
 
-       return Response::make('updated quiz with score!', 200, $headers);
+       return Response::make(json_encode($json), 200, $headers);
         
     }    
 
