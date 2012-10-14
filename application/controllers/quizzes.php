@@ -9,7 +9,7 @@ class Quizzes_Controller extends Base_Controller {
      */
 	public function get_index()
     {
-        $quizzes = Quiz::withStats();
+        $quizzes = Quiz::withQuestionCountAndAverageScore();
 
         return View::make('quiz.index')
             ->with('quizzes', $quizzes);

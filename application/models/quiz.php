@@ -12,13 +12,26 @@ class Quiz extends Eloquent
 		return $this->has_many('Score');
 	}
 
-	public static function withStats()
+	public static function withQuestionCountAndAverageScore()
 	{
-		return DB::query(
-			"SELECT quizzes.title, instructor, slug, count(questions.quiz_id) as numQuestions, CAST(AVG(scores.score) as UNSIGNED) as averageScore
-			FROM quizzes
-			LEFT JOIN scores ON scores.quiz_id = quizzes.id
-			LEFT JOIN questions ON questions.quiz_id = quizzes.id
-			GROUP BY quizzes.title");
+		$quizzes = Quiz::left_join('questions', 'questions.quiz_id', '=', 'quizzes.id')
+				->group_by('quizzes.id')
+				->get(array(
+					'quizzes.id',
+					'quizzes.title',
+					'instructor',
+					'slug',
+					DB::raw('count(*) as numQuestions')));
+
+		$averageScores = Quiz::left_join('scores', 'scores.quiz_id', '=', 'quizzes.id')
+				->group_by('quizzes.id')
+				->get(array('quizzes.id', 'scores.score'));
+
+		for($i = 0; $i < count($quizzes); $i++) {
+            $quizzes[$i]->score = $averageScores[$i]->score;
+        }
+
+        return $quizzes;
 	}
+
 }
