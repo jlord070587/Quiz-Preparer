@@ -23,7 +23,7 @@
 				<td>{{HTML::link_to_route('questions', $quiz->title, $quiz->slug);}}</td>
 				<td>{{$quiz->instructor}}</td>
 				<td>{{$quiz->numquestions}}</td>
-				<td>{{(int)$quiz->score}}%</td>
+				<td>{{(int)$quiz->score}}% from {{$quiz->takers}} people</td>
 				<td>{{HTML::link('http://tutsplus.s3.amazonaws.com/tutspremium/quizzes/index.html?id=' . $quiz->slug, 'Link')}}</td>
 			</tr>
 		@empty

@@ -25,10 +25,15 @@ class Quiz extends Eloquent
 
 		$averageScores = Quiz::left_join('scores', 'scores.quiz_id', '=', 'quizzes.id')
 				->group_by('quizzes.id')
-				->get(array('quizzes.id', 'scores.score'));
+				->get(array(
+					'quizzes.id',
+					DB::raw('CAST(AVG(scores.score) as UNSIGNED) as averageScore'),
+					DB::raw('count(scores.id) as takers')
+				));
 
 		for($i = 0; $i < count($quizzes); $i++) {
             $quizzes[$i]->score = $averageScores[$i]->score;
+            $quizzes[$i]->takers = $averageScores[$i]->takers;
         }
 
         return $quizzes;
