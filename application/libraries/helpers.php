@@ -8,7 +8,7 @@ class Helpers {
 	            if ( $question->$key !== '' ) {
 	                $question->$key = preg_split('/^ ?- ?/m', $question->$key, 0, PREG_SPLIT_NO_EMPTY);
 	            }
-	        } 
+	        }
 	    }
 
 	    return $questions;

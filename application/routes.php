@@ -1,7 +1,13 @@
 <?php
 
-// quiz Resource
-Route::get('/', 'quizzes@index');
+// Login
+Route::get('/', array('as' => 'login', 'uses' => 'home@index'));
+Route::get('login', 'home@index');
+Route::get('logout', 'home@logout');
+Route::post('authentication', 'authentication@create');
+
+
+// Quiz Resource
 Route::get('quizzes', array('as' => 'quizzes', 'uses' => 'quizzes@index'));
 Route::get('quizzes/(:any)', array('as' => 'quiz', 'uses' => 'questions@index'));
 Route::get('quizzes/new', array('as' => 'new_quiz', 'uses' => 'quizzes@new'));

@@ -1,8 +1,13 @@
 <?php
 
-class Questions_Controller extends Base_Controller {    
+class Questions_Controller extends Base_Controller {
 
     public $restful = true;
+
+    public function __construct()
+    {
+        $this->filter('before', 'auth');
+    }
 
     /**
      * Display all questions and add new ones for a quiz
@@ -55,7 +60,7 @@ class Questions_Controller extends Base_Controller {
     public function get_json($quizSlug)
     {
         $quiz = Quiz::where_slug($quizSlug)->first();
-        $questions= $quiz->questions()->order_by(DB::raw('RAND()'))->get();    
+        $questions= $quiz->questions()->order_by(DB::raw('RAND()'))->get();
 
         $json = array(
             'meta' => array(
@@ -66,7 +71,7 @@ class Questions_Controller extends Base_Controller {
         );
 
         $questions = Helpers::dashSeparatedToArray($questions, array('choices', 'accept'));
-        
+
         $json['questions'] = eloquent_to_json($questions);
 
         $response = new Response(json_encode($json));
@@ -109,5 +114,5 @@ class Questions_Controller extends Base_Controller {
         Question::find($id)->delete();
         return Redirect::back();
     }
-    
+
 }

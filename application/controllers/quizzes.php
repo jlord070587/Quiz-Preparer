@@ -2,7 +2,12 @@
 
 class Quizzes_Controller extends Base_Controller {
 
-	public $restful = true;    
+	public $restful = true;
+
+    public function __construct()
+    {
+        $this->filter('before', 'auth');
+    }
 
     /**
      * List all quizzes in db
@@ -10,10 +15,12 @@ class Quizzes_Controller extends Base_Controller {
 	public function get_index()
     {
         $quizzes = Quiz::withQuestionCountAndAverageScore();
+        $title = 'Quizzes';
 
         return View::make('quiz.index')
-            ->with('quizzes', $quizzes);
-    }    
+            ->with('quizzes', $quizzes)
+            ->with('title', $title);
+    }
 
     /**
      * Create a new quiz
@@ -23,8 +30,8 @@ class Quizzes_Controller extends Base_Controller {
         $input = (object)Input::get();
 
         // validate
-        // 
-        
+        //
+
         $createdQuiz = Quiz::create(array(
             'title' => $input->title,
             'instructor' => $input->instructor,
@@ -34,7 +41,7 @@ class Quizzes_Controller extends Base_Controller {
         ));
 
         return Redirect::to_route('quizzes');
-    }    
+    }
 
     /**
      * View and add questions to this quiz
@@ -42,17 +49,17 @@ class Quizzes_Controller extends Base_Controller {
 	public function get_show($id)
     {
         return View::make('quiz.show');
-    }    
+    }
 
 	public function get_edit()
     {
 
-    }    
+    }
 
 	public function get_new()
     {
         return View::make('quiz.new');
-    } 
+    }
 
     public function get_update() { $this->put_update(); }
 	public function put_update()
@@ -73,7 +80,7 @@ class Quizzes_Controller extends Base_Controller {
         );
 
        return Response::make('Score Added', 200, $headers);
-    }    
+    }
 
 	public function delete_destroy()
     {
